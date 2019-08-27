@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   
+    {%for i in data%}
+    <h1>---------------------------------------------------</h1>
+    <form method="POST" action="ping" >
+                  {%csrf_token%}
+                  <p>
+                    status :  {{i.Status}} 
+                  </p><br>
+                  <p>
+                        Imei :{{i.Imei}}
+                  </p><br>
+                  <h4>Device Info</h4>
+                  <p>
+                     {{i.Device_info}}
+                  </p><br>
+                  
+                  <h4>System Apps</h4>
+                  <p>
+                      
+                      {%for j in i.Installed_Apps%}
+                          {%if j.SystemApp%}
+                            <p>{{j}}</p>
+                          {%endif%} 
+                      {%endfor%}
+                  </p><br>
+
+                  <h4>Installed Apps</h4>
+                  <p>
+                      
+                     {%for j in i.Installed_Apps%}
+                        {%if j.SystemApp == False%}
+                              <p>{{j}}</p>
+                            {%endif%} 
+                    {%endfor%}
+                    </p>
+  
+
+
+                  <input type="text" name="ping"><button type="submit" name="btn" value={{i.Device_info.id}}> Send </button>
+
+    </form>
+    
+     
+
+    {%endfor%}
+    
+</body>
+</html>
