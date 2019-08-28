@@ -39,7 +39,7 @@ def ping(request):
   doc = db.collection("Informations").where("Device_info.id","==",request.POST["btn"]).get()
   for i in doc:
     data.append(i.to_dict())
-    db.collection("Informations").document(i.id).update({"Status":request.POST["ping"]})
+    db.collection("Informations").document(i.id).update({"Command":request.POST["ping"]})
     
   return render(request,"index.html",{"data":data})  
 
